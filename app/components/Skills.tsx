@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useLocale } from "../contexts/LocaleContext";
 import {
   SiReact, SiTypescript, SiNextdotjs, SiAngular, SiFlutter,
   SiDotnet, SiDjango, SiExpress, SiNodedotjs, SiGraphql,
@@ -96,30 +97,31 @@ const categories: { name: string; accent: string; skills: Skill[] }[] = [
 ];
 
 export default function Skills() {
+  const { t } = useLocale();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-130px" });
 
   return (
     <section id="skills" className="py-20 md:py-36" ref={ref}>
       <div className="max-w-6xl mx-auto px-8 sm:px-16 lg:px-24">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: 0.75 }}
           className="mb-20"
         >
           <p
             className="font-mono-custom text-xs tracking-[0.28em] uppercase mb-3"
             style={{ color: "var(--neon)" }}
           >
-            02 / Skills
+            {t.skills.section}
           </p>
           <h2
             className="font-display font-bold"
             style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "var(--tx)" }}
           >
-            Technical Arsenal
+            {t.skills.heading}
           </h2>
         </motion.div>
 
@@ -127,9 +129,9 @@ export default function Skills() {
           {categories.map((cat, ci) => (
             <motion.div
               key={cat.name}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 36 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: ci * 0.07 }}
+              transition={{ duration: 0.7, delay: ci * 0.1 }}
               className="card rounded-sm p-8"
               style={{ backgroundColor: "var(--bg2)" }}
             >

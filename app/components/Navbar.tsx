@@ -3,18 +3,21 @@ import { useLayoutEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Work" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
-];
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLocale } from "../contexts/LocaleContext";
 
 export default function Navbar() {
+  const { t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const links = [
+    { href: "#about", label: t.nav.about },
+    { href: "#skills", label: t.nav.skills },
+    { href: "#experience", label: t.nav.work },
+    { href: "#projects", label: t.nav.projects },
+    { href: "#contact", label: t.nav.contact },
+  ];
 
   useLayoutEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -39,7 +42,6 @@ export default function Navbar() {
         }}
       >
         <div className="max-w-6xl mx-auto px-6 sm:px-16 lg:px-24 py-5 flex items-center justify-between">
-          {/* Logo */}
           <a href="#home" className="flex items-center gap-3 group">
             <div
               className="w-9 h-9 rounded-sm flex items-center justify-center font-display font-bold text-sm transition-all duration-300 group-hover:bg-[rgba(0,245,212,0.08)]"
@@ -55,13 +57,13 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          {/* Desktop */}
+          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-mono-custom text-xs tracking-[0.1em] uppercase transition-colors duration-200 hover:text-[var(--tx)]"
+                className="font-mono-custom text-xs tracking-[0.08em] uppercase whitespace-nowrap transition-colors duration-200 hover:text-[var(--tx)]"
                 style={{ color: "var(--tx2)" }}
               >
                 {link.label}
@@ -69,16 +71,17 @@ export default function Navbar() {
             ))}
             <a
               href="#contact"
-              className="font-mono-custom text-xs tracking-[0.1em] uppercase px-4 py-2 rounded-sm transition-all duration-200 hover:bg-[rgba(0,245,212,0.08)]"
+              className="font-mono-custom text-xs tracking-[0.08em] uppercase whitespace-nowrap px-3 py-2 rounded-sm transition-all duration-200 hover:bg-[rgba(0,245,212,0.08)]"
               style={{ border: "1px solid var(--neon)", color: "var(--neon)" }}
             >
-              Hire Me
+              {t.nav.hire}
             </a>
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
 
-          {/* Mobile: theme + hamburger */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile */}
+          <div className="flex items-center gap-2 lg:hidden">
             <ThemeToggle />
             <button
               onClick={() => setOpen((v) => !v)}
@@ -92,7 +95,6 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile menu overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -101,7 +103,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-40 md:hidden flex flex-col justify-center px-10"
+            className="fixed inset-0 z-40 lg:hidden flex flex-col justify-center px-10"
             style={{ backgroundColor: "var(--bg)" }}
           >
             <nav className="flex flex-col">
@@ -114,11 +116,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.055, duration: 0.25 }}
                   className="font-display font-extrabold py-4 border-b transition-colors duration-150 hover:text-[var(--neon)]"
-                  style={{
-                    fontSize: "clamp(1.8rem, 8vw, 2.4rem)",
-                    color: "var(--tx)",
-                    borderColor: "var(--bd)",
-                  }}
+                  style={{ fontSize: "clamp(1.8rem, 8vw, 2.4rem)", color: "var(--tx)", borderColor: "var(--bd)" }}
                 >
                   {link.label}
                 </motion.a>
@@ -129,11 +127,19 @@ export default function Navbar() {
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: links.length * 0.055 + 0.05, duration: 0.25 }}
-                className="mt-8 font-mono-custom text-sm tracking-wider uppercase px-6 py-3.5 rounded-sm text-center"
+                className="mt-6 font-mono-custom text-sm tracking-wider uppercase px-6 py-3.5 rounded-sm text-center"
                 style={{ backgroundColor: "var(--neon)", color: "var(--bg)" }}
               >
-                Hire Me
+                {t.nav.hire}
               </motion.a>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: links.length * 0.055 + 0.15 }}
+                className="mt-6 flex justify-center"
+              >
+                <LanguageSwitcher />
+              </motion.div>
             </nav>
           </motion.div>
         )}

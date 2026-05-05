@@ -2,32 +2,19 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Mail, Link, Phone, ArrowUpRight } from "lucide-react";
+import { useLocale } from "../contexts/LocaleContext";
 
-const contacts = [
-  {
-    label: "Email",
-    value: "aladmocu@gmail.com",
-    href: "mailto:aladmocu@gmail.com",
-    icon: Mail,
-  },
-  {
-    label: "LinkedIn",
-    value: "/in/AladMocu",
-    href: "https://linkedin.com/in/AladMocu",
-    icon: Link,
-    external: true,
-  },
-  {
-    label: "Phone",
-    value: "+57 (302) 753-9385",
-    href: "tel:+573027539385",
-    icon: Phone,
-  },
+const contactsMeta = [
+  { key: "email" as const, value: "aladmocu@gmail.com", href: "mailto:aladmocu@gmail.com", icon: Mail },
+  { key: "linkedin" as const, value: "/in/AladMocu", href: "https://linkedin.com/in/AladMocu", icon: Link, external: true },
+  { key: "phone" as const, value: "+57 (302) 753-9385", href: "tel:+573027539385", icon: Phone },
 ];
 
 export default function Contact() {
+  const { t } = useLocale();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-130px" });
+  const contacts = contactsMeta.map((m) => ({ ...m, label: t.contact[m.key] }));
 
   return (
     <section
@@ -42,24 +29,24 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto px-8 sm:px-16 lg:px-24">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: 0.75 }}
           className="mb-20"
         >
           <p
             className="font-mono-custom text-xs tracking-[0.28em] uppercase mb-4"
             style={{ color: "var(--neon)" }}
           >
-            05 / Contact
+            {t.contact.section}
           </p>
           <h2
             className="font-display font-extrabold leading-tight"
-            style={{ fontSize: "clamp(2.2rem, 9vw, 7rem)", color: "var(--tx)", wordBreak: "break-word" }}
+            style={{ fontSize: "clamp(2.2rem, 6vw, 5rem)", color: "var(--tx)", wordBreak: "break-word" }}
           >
-            Let&apos;s build
+            {t.contact.heading_1}
             <br />
-            <span style={{ color: "var(--neon)" }}>something.</span>
+            <span style={{ color: "var(--neon)" }}>{t.contact.heading_2}</span>
           </h2>
         </motion.div>
 
@@ -73,9 +60,9 @@ export default function Contact() {
                 href={contact.href}
                 target={contact.external ? "_blank" : undefined}
                 rel={contact.external ? "noopener noreferrer" : undefined}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.7, delay: i * 0.13 }}
                 className="group card rounded-sm p-8 flex items-center justify-between"
                 style={{ backgroundColor: "var(--bg)" }}
               >
@@ -115,7 +102,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.55, delay: 0.4 }}
+          transition={{ duration: 0.75, delay: 0.5 }}
           className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8"
           style={{ borderTop: "1px solid var(--bd)" }}
         >
@@ -126,13 +113,13 @@ export default function Contact() {
             className="font-mono-custom text-xs tracking-[0.15em]"
             style={{ color: "var(--tx2)" }}
           >
-            © {new Date().getFullYear()} · Systems Engineer · Bogotá, Colombia
+             {new Date().getFullYear()} · {t.contact.footer_role} · {t.contact.footer_location}
           </div>
           <div
             className="font-mono-custom text-xs"
             style={{ color: "var(--tx3)" }}
           >
-            Built with Next.js &amp; Framer Motion
+            {t.contact.footer_built}
           </div>
         </motion.div>
       </div>

@@ -38,7 +38,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--tx);
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-geist-sans), var(--font-noto-jp), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -51,7 +51,7 @@ body {
 
 ::selection { background: rgba(0, 245, 212, 0.15); color: var(--neon); }
 
-.font-display { font-family: var(--font-syne), sans-serif; }
+.font-display { font-family: var(--font-syne), var(--font-noto-jp), sans-serif; }
 .font-mono-custom { font-family: var(--font-geist-mono), monospace; }
 
 .card {

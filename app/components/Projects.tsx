@@ -2,110 +2,49 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Smartphone, Globe, Code2 } from "lucide-react";
+import { useLocale } from "../contexts/LocaleContext";
 
-const featured = [
-  {
-    name: "Octapus",
-    type: "Web Platform",
-    icon: Globe,
-    accent: "#00f5d4",
-    description:
-      "B2B web platform built with React/Vite, .NET, and Django. Containerized with Docker and orchestrated via Kubernetes with automated CI/CD pipelines.",
-    tech: ["React", "TypeScript", ".NET", "Django", "Docker", "Kubernetes"],
-    links: [{ label: "octapus.io", url: "https://octapus.io" }],
-  },
-  {
-    name: "La Totuga",
-    type: "Mobile App",
-    icon: Smartphone,
-    accent: "#8b5cf6",
-    description:
-      "Music streaming mobile app live on the Play Store. Cross-platform Flutter app backed by GCP cloud architecture with Redis caching and Next.js web.",
-    tech: ["Flutter", "Dart", "GCP", "Next.js", "Redis"],
-    links: [
-      {
-        label: "Play Store",
-        url: "https://play.google.com/store/apps/details?id=app.totuga.totugamusic",
-      },
-    ],
-  },
-  {
-    name: "Singularity Health",
-    type: "App Suite · 3 Apps",
-    icon: Smartphone,
-    accent: "#60a5fa",
-    description:
-      "Suite of three health & medical apps (Florenz Health, Monaco, VitalLog) built with Flutter. Compliance-grade data handling for healthcare environments.",
-    tech: ["Flutter", "Dart", "GraphQL", "Medical Data", "CI/CD"],
-    links: [
-      {
-        label: "Florenz",
-        url: "https://play.google.com/store/apps/details?id=health.singularity.florenzhealth",
-      },
-      {
-        label: "Monaco",
-        url: "https://play.google.com/store/apps/details?id=health.singularity.monaco",
-      },
-      {
-        label: "VitalLog",
-        url: "https://play.google.com/store/apps/details?id=health.singularity.vitalLog",
-      },
-    ],
-  },
+const featuredMeta = [
+  { name: "Octapus",          icon: Globe,      accent: "#00f5d4", tech: ["React", "TypeScript", ".NET", "Django", "Docker", "Kubernetes"],   links: [{ label: "octapus.io", url: "https://octapus.io" }] },
+  { name: "La Totuga",        icon: Smartphone, accent: "#8b5cf6", tech: ["Flutter", "Dart", "GCP", "Next.js", "Redis"],                       links: [{ label: "Play Store", url: "https://play.google.com/store/apps/details?id=app.totuga.totugamusic" }] },
+  { name: "Singularity Health", icon: Smartphone, accent: "#60a5fa", tech: ["Flutter", "Dart", "GraphQL", "Medical Data", "CI/CD"],           links: [{ label: "Florenz", url: "https://play.google.com/store/apps/details?id=health.singularity.florenzhealth" }, { label: "Monaco", url: "https://play.google.com/store/apps/details?id=health.singularity.monaco" }, { label: "VitalLog", url: "https://play.google.com/store/apps/details?id=health.singularity.vitalLog" }] },
 ];
 
-const personal = [
-  {
-    name: "Health & Help",
-    accent: "#fb7185",
-    icon: Code2,
-    description:
-      "Private emergency alarm system for trained medical personnel and first responders.",
-    tech: ["Mobile", "Emergency Systems"],
-  },
-  {
-    name: "VBox",
-    accent: "#34d399",
-    icon: Code2,
-    description:
-      "Diet planner and scheduler providing personalized recipes for vegetarian/vegan transitions.",
-    tech: ["Web App", "Nutrition"],
-  },
-  {
-    name: "CMSites",
-    accent: "#f59e0b",
-    icon: Code2,
-    description:
-      "Site monitoring service checking availability and status of multiple domains with real-time notifications.",
-    tech: ["Node.js", "SMTP", "Monitoring"],
-  },
+const personalMeta = [
+  { name: "Health & Help", accent: "#fb7185", icon: Code2, tech: ["Mobile", "Emergency Systems"] },
+  { name: "VBox",          accent: "#34d399", icon: Code2, tech: ["Web App", "Nutrition"] },
+  { name: "CMSites",       accent: "#f59e0b", icon: Code2, tech: ["Node.js", "SMTP", "Monitoring"] },
 ];
 
 export default function Projects() {
+  const { t } = useLocale();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-130px" });
+
+  const featured = featuredMeta.map((m, i) => ({ ...m, type: t.projects.featured[i].type, description: t.projects.featured[i].description }));
+  const personal = personalMeta.map((m, i) => ({ ...m, description: t.projects.personal[i].description }));
 
   return (
     <section id="projects" className="py-20 md:py-36" ref={ref}>
       <div className="max-w-6xl mx-auto px-8 sm:px-16 lg:px-24">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: 0.75 }}
           className="mb-20"
         >
           <p
             className="font-mono-custom text-xs tracking-[0.28em] uppercase mb-3"
             style={{ color: "var(--neon)" }}
           >
-            04 / Projects
+            {t.projects.section}
           </p>
           <h2
             className="font-display font-bold"
             style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "var(--tx)" }}
           >
-            Featured Work
+            {t.projects.heading}
           </h2>
         </motion.div>
 
@@ -116,9 +55,9 @@ export default function Projects() {
             return (
               <motion.div
                 key={project.name}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 36 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.7, delay: i * 0.13 }}
                 className="card rounded-sm p-8 flex flex-col"
                 style={{ backgroundColor: "var(--bg2)" }}
               >
@@ -200,9 +139,9 @@ export default function Projects() {
             return (
               <motion.div
                 key={project.name}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 28 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.45, delay: 0.3 + i * 0.07 }}
+                transition={{ duration: 0.65, delay: 0.25 + i * 0.1 }}
                 className="card rounded-sm p-7"
                 style={{ backgroundColor: "var(--bg2)" }}
               >
@@ -212,7 +151,7 @@ export default function Projects() {
                     className="font-mono-custom text-xs tracking-wider uppercase"
                     style={{ color: "var(--tx2)" }}
                   >
-                    Personal Project
+                    {t.projects.personal_label}
                   </span>
                 </div>
                 <h3
