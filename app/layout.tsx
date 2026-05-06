@@ -33,7 +33,6 @@ export const metadata: Metadata = {
   creator: "Albert Molano",
   publisher: "Albert Molano",
   metadataBase: new URL(baseUrl),
-  canonical: baseUrl,
   alternates: {
     canonical: baseUrl,
   },
