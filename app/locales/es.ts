@@ -7,7 +7,7 @@ const es: Translations = {
   },
   hero: {
     eyebrow: "Ingeniero de Sistemas · Bogotá, Colombia",
-    roles: ["Desarrollador Fullstack", "Ingeniero Mobile", "Arquitecto Cloud", "Ingeniero de Sistemas"],
+    roles: ["Desarrollador Fullstack", "Desarrollador Mobile", "Arquitecto Cloud", "Ingeniero de Sistemas y Computación"],
     description: "Construyendo sistemas escalables con React, .NET, Flutter y Azure. De apps móviles a infraestructura cloud — entrego resultados.",
     cta_work: "Ver Proyectos",
     cta_hello: "Contactar",
@@ -47,7 +47,7 @@ const es: Translations = {
         ],
       },
       {
-        role: "Instructor de Desarrollo Web", type: "Tiempo parcial",
+        role: "Profesor de Desarrollo Web", type: "Tiempo parcial",
         points: [
           "Enseñanza de desarrollo web introductorio a participantes externos",
           "Diseño de materiales del curso, ejercicios prácticos y proyectos aplicados",

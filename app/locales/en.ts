@@ -4,8 +4,8 @@ const en = {
     projects: "Projects", contact: "Contact", hire: "Hire Me",
   },
   hero: {
-    eyebrow: "Systems Engineer · Bogotá, Colombia",
-    roles: ["Fullstack Developer", "Mobile Engineer", "Cloud Architect", "Systems Engineer"],
+    eyebrow: "Systems and Computing Engineer · Bogotá, Colombia",
+    roles: ["Fullstack Developer", "Mobile Developer", "Cloud Architect", "Systems and Computing Engineer"],
     description: "Building scalable systems with React, .NET, Flutter & Azure. From mobile apps to cloud infrastructure — I ship.",
     cta_work: "View Work",
     cta_hello: "Say Hello",
@@ -45,7 +45,7 @@ const en = {
         ],
       },
       {
-        role: "Web Dev Instructor", type: "Part-time",
+        role: "Web Dev Lecturer", type: "Part-time",
         points: [
           "Taught introductory web development to external participants",
           "Designed course material, practical exercises, and hands-on projects",
@@ -90,7 +90,7 @@ const en = {
       },
     ],
     education: {
-      degree: "BEng. Systems and Computing Engineering",
+      degree: "B.S. Systems and Computing Engineering",
       thesis: "Implementation of an IPS prototype for OneM2M IoT devices using Machine Learning",
     },
   },
