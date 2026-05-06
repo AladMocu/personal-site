@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useLocale } from "../contexts/LocaleContext";
 
-const values = [5, 7, 4, 15];
+const values = [6, 7, 4, 15];
 const suffixes = ["+", "", "+", "+"];
 
 function CountUp({ to, suffix, active }: { to: number; suffix: string; active: boolean }) {
