@@ -1,0 +1,16 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+Disallow: /api/private/
+
+# Specific directives for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Point to sitemap
+Sitemap: https://albertmolano.com/sitemap.xml
