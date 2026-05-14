@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "HYWenHei";
+  src: url("/HYWenHei Extended.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg: #050509;
   --bg2: #0c0c15;
@@ -53,6 +61,19 @@ body {
 
 .font-display { font-family: var(--font-syne), var(--font-noto-jp), sans-serif; }
 .font-mono-custom { font-family: var(--font-geist-mono), monospace; }
+.font-hywei { font-family: "HYWenHei", var(--font-noto-jp), serif; }
+
+.arcana-count-input {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.arcana-count-input::-webkit-outer-spin-button,
+.arcana-count-input::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .card {
   border: 1px solid var(--bd);
